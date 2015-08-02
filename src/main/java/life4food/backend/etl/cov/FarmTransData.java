@@ -39,8 +39,20 @@ public class FarmTransData {
 		System.out.println("process day: "+ syncDay);
 		
 	}
+	public FarmTransData(String start, String end){
+		this.start = Ints.tryParse(start.substring(0,4))-1911 
+						+ "." + start.substring(5,7) 
+						+ "." + start.substring(8,10);
+
+		this.end   = Ints.tryParse(end.substring(0,4))-1911 
+						+ "." + end.substring(5,7) 
+						+ "." + end.substring(8,10);
+		
+		System.out.println("process day: "+ start + " till " + end);
+		
+	}
 	
-	String syncDay ;
+	String syncDay, start, end ;
 	Integer top = 500;
 	Integer skip = 0;
 	
@@ -151,11 +163,16 @@ public class FarmTransData {
 	public static FarmTransData create(String day){
 		return new FarmTransData(day);
 	}
+	public static FarmTransData create(String start, String end){
+		return new FarmTransData(start, end);
+	}
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
 		
-		if ( 0 < args.length ){
+		if ( 1 == args.length ){
 			FarmTransData.create(args[0]).analyze();
+		}else if ( 2 == args.length ){
+			FarmTransData.create(args[0], args[1]).analyze();
 		}else{
 			FarmTransData.create().analyze();
 		}
