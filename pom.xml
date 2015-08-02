@@ -48,11 +48,10 @@
 	        <version>1.8</version>
 	        <configuration>
 	          <programs>
-	          <!--  
 				<program>
-	              <mainClass>tw.net.cns.eng.AnalyzeCableData</mainClass>
-	              <id>analyzeCableData</id>
-	            </program>	-->
+	              <mainClass>life4food.backend.etl.cov.FarmTransData</mainClass>
+	              <id>farmTransData</id>
+	            </program>
 	          </programs>
 	        </configuration>
 	      </plugin>	      
