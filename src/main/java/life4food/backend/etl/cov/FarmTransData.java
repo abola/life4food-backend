@@ -2,7 +2,6 @@ package life4food.backend.etl.cov;
 
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
-import java.net.URLEncoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,7 +32,12 @@ public class FarmTransData {
 		
 	}
 	public FarmTransData(String day){
-		this.syncDay = day;
+		this.syncDay = Ints.tryParse(day.substring(0,4))-1911 
+						+ "." + day.substring(5,7) 
+						+ "." + day.substring(8,10);
+		
+		System.out.println("process day: "+ syncDay);
+		
 	}
 	
 	String syncDay ;
@@ -149,16 +153,12 @@ public class FarmTransData {
 	}
 
 	public static void main(String[] args) throws UnsupportedEncodingException {
-//        System.out.println("Hello! World!");
-		FarmTransData.create("104.07.01").analyze();
-		FarmTransData.create("104.07.02").analyze();
-		FarmTransData.create("104.07.03").analyze();
-		FarmTransData.create("104.07.04").analyze();
-		FarmTransData.create("104.07.05").analyze();
-		FarmTransData.create("104.07.06").analyze();
-		FarmTransData.create("104.07.07").analyze();
-		FarmTransData.create("104.07.08").analyze();
-		FarmTransData.create("104.07.09").analyze();
+		
+		if ( 0 < args.length ){
+			FarmTransData.create(args[0]).analyze();
+		}else{
+			FarmTransData.create().analyze();
+		}
 		
 	}
 }
