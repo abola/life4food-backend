@@ -65,6 +65,10 @@ public class FarmTransData {
 			if ( null != syncDay ){
 				url += "&StartDate="+syncDay+"&EndDate=" + syncDay;
 			}
+			if ( null != start && null != end ){
+				url += "&StartDate="+start+"&EndDate=" + end;
+			}
+			
 			// &Market=" + URLEncoder.encode("三重市", "UTF-8")
 			System.out.println("call url: " + url);
 			String result = RemoteUrl.get(url);
@@ -167,7 +171,7 @@ public class FarmTransData {
 		return new FarmTransData(start, end);
 	}
 
-	public static void main(String[] args) throws UnsupportedEncodingException {
+	public static void main(String[] args) {
 		
 		if ( 1 == args.length ){
 			FarmTransData.create(args[0]).analyze();
