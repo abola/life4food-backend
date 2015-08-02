@@ -7,7 +7,7 @@ public class MySQLDataSource extends AbstractDataSource {
 	 
 	static String driver  = "com.mysql.jdbc.Driver";
 	
-	public String connectionStringCov = "jdbc:mysql://128.199.204.20/cov?user=cov&password=";
+	public static String connectionStringCov = "jdbc:mysql://128.199.204.20/cov?user=cov&password=&useUnicode=true&characterEncoding=utf8"; 
 	// default
 	public String connectionString = connectionStringCov;
 	
@@ -37,6 +37,13 @@ public class MySQLDataSource extends AbstractDataSource {
 
 	
 	public static void execute(String sql, String connectionString ) throws DataSourceException{
+		MySQLDataSource mds = new MySQLDataSource();
+		mds.setConnectionString( connectionString );
+		mds.execute(sql);
+	}	
+
+	
+	public static void execute(List<String> sql, String connectionString ) throws DataSourceException{
 		MySQLDataSource mds = new MySQLDataSource();
 		mds.setConnectionString( connectionString );
 		mds.execute(sql);

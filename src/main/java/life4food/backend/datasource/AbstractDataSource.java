@@ -6,6 +6,7 @@ import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -110,7 +111,42 @@ public abstract class AbstractDataSource implements DataSource {
 			// close anyway
 		}
 	}
-	 
+	@Override public void execute(Collection<String> sql )throws DataSourceException{
+		if ( null == connection ) {
+			connect();
+			execute(sql);
+			return;
+		}
+		Statement stmt = null ;
+		try {
+			stmt = connection.createStatement();
+		} catch (SQLException e) {
+			log.error("Create statement failed CauseBy: " + e.getMessage()  );
+			e.printStackTrace();
+			throw new DataSourceException( e.getMessage() );
+		}
+		
+		String _sql = "";
+		try {
+			for( String eachSQL: sql ){
+				_sql = eachSQL;
+				stmt.execute(eachSQL);
+			}
+		} catch (SQLException e1) {
+			e1.printStackTrace();
+			System.out.println(_sql);
+			throw new DataSourceException(e1.getMessage() + ". SQL: " + _sql);
+		}
+		
+		// release resource
+		try {
+			stmt.close(); stmt=null;
+			close(); connection=null;
+		} catch (Exception e) {
+			// close anyway
+		}
+	}
+	
 	/**
 	 * 取得 DB 連線使用的 Driver
 	 * @return

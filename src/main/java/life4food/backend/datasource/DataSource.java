@@ -1,5 +1,6 @@
 package life4food.backend.datasource;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
@@ -32,4 +33,13 @@ public interface DataSource {
 	 * @throws DataSourceException
 	 */
 	void execute(String sql) throws DataSourceException;
+	
+
+	
+	/**
+	 * 執行sql update/delete/insert
+	 * @param sql
+	 * @throws DataSourceException
+	 */
+	void execute(Collection<String> sql) throws DataSourceException;
 }
