@@ -99,14 +99,14 @@ public class FarmTransData {
 		
 		String insertSQLFormat = "insert into farm_trans_data("
 				+ "trade_day,crop_code,crop_name,market_code,market_name"
-				+ ",top_value,medium_value,low_value,mean_value,volumn"
+				+ ",top_value,medium_value,low_value,mean_value,volume"
 				+ ") values('%s','%s','%s',%s,'%s',%s,%s,%s,%s,%s) "
 				+ "ON DUPLICATE KEY UPDATE "
 				+ "top_value=VALUES(top_value)"
 				+ ", medium_value=(medium_value)"
 				+ ", low_value=(low_value)"
 				+ ", mean_value=(mean_value)"
-				+ ", volumn=(volumn)"
+				+ ", volume=(volume)"
 				;
 		
 		List<String> insertSQL = Lists.newArrayList();
@@ -125,12 +125,12 @@ public class FarmTransData {
 			String medium_value = result.get("medium_value").toString();
 			String low_value = result.get("low_value").toString();
 			String mean_value = result.get("mean_value").toString();
-			String volumn = result.get("volumn").toString();
+			String volume = result.get("volume").toString();
 			
 			insertSQL.add(
 				String.format(insertSQLFormat
 					,trade_day,crop_code,crop_name,market_code,market_name
-					,top_value,medium_value,low_value,mean_value,volumn
+					,top_value,medium_value,low_value,mean_value,volume
 					)
 			);
 			
@@ -154,7 +154,7 @@ public class FarmTransData {
 							 .replaceAll("中價", "medium_value")
 							 .replaceAll("下價", "low_value")
 							 .replaceAll("平均價", "mean_value")
-							 .replaceAll("交易量", "volumn")
+							 .replaceAll("交易量", "volume")
 							 ;
 		return after;
 		
