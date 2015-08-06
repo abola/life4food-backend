@@ -52,6 +52,10 @@
 	              <mainClass>life4food.backend.etl.cov.FarmTransData</mainClass>
 	              <id>farmTransData</id>
 	            </program>
+				<program>
+	              <mainClass>life4food.backend.etl.cov.ResumeDataPlus</mainClass>
+	              <id>resumeDataPlus</id>
+	            </program>
 	          </programs>
 	        </configuration>
 	      </plugin>	      
